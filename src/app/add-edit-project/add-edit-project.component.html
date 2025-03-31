@@ -1,0 +1,93 @@
+<div class="container mt-4">
+  <h2 class="text-primary mb-4">
+    {{ isEdit ? "Edit Project" : "Add New Project" }}
+  </h2>
+
+  <div class="card shadow-lg p-4">
+    <form (ngSubmit)="saveProject()">
+      <!-- Project Title -->
+      <div class="mb-3">
+        <label class="form-label">Project Title</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="project.title"
+          name="title"
+          required
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="project.description"
+          name="description"
+        ></textarea>
+      </div>
+
+      <!-- Project Manager -->
+      <div class="mb-3">
+        <label class="form-label">Project Manager</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="project.manager"
+          name="manager"
+          required
+        />
+      </div>
+
+      <!-- Start Date & End Date -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="project.startDate"
+              name="startDate"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="project.endDate"
+              name="endDate"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Members -->
+      <div class="mb-3">
+        <label class="form-label">Team Members</label>
+        <select
+          class="form-select"
+          multiple
+          [(ngModel)]="project.teamMembers"
+          name="teamMembers"
+        >
+          <option *ngFor="let user of availableUsers" [value]="user">
+            {{ user }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Buttons -->
+      <div class="btn-group">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

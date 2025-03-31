@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <nav class="breadcrumb">
+    <a class="breadcrumb-item" routerLink="/projects">Home</a>
+    <span class="breadcrumb-item active">{{ project?.title }}</span>
+  </nav>
+
+  <h2 class="text-primary">{{ project?.title }}</h2>
+  <p class="text-muted">Managed by: {{ project?.manager }}</p>
+
+  <!-- Progress Bar -->
+  <div class="progress mb-3">
+    <div
+      class="progress-bar bg-success"
+      [style.width.%]="project.progress"
+    ></div>
+  </div>
+
+  <!-- Task List -->
+  <ul class="list-group">
+    <li
+      *ngFor="let task of project.tasks"
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
+      <span
+        [ngClass]="{
+          'text-danger': task.priority === 'High',
+          'text-warning': task.priority === 'Medium',
+          'text-primary': task.priority === 'Low'
+        }"
+      >
+        {{ task.title }}
+      </span>
+      <div>
+        <button
+          class="btn btn-outline-primary btn-sm"
+          (click)="editTask(task.id)"
+        >
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button
+          class="btn btn-outline-danger btn-sm"
+          (click)="deleteTask(task.id)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
